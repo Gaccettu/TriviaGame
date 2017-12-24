@@ -52,10 +52,10 @@ questionAnswerD.attr("data-answer", "d");
 
 $(".startButton").on("click", gamePlay);
 $(document).on("click", ".restartButton", function(){
-    var rightAnswers = 0;
-    var wrongAnswers = 0;
-    var unanswered = 0;
-    var questionNumber = 0;
+    rightAnswers = 0;
+    wrongAnswers = 0;
+    unanswered = 0;
+    questionNumber = 0;
     time = 30;
     intervalId = setInterval(count,1000);
     $("#game").html(timerDiv);
