@@ -8,23 +8,32 @@ var questionAnswerB = $("<p>", {class: "answers"});
 var questionAnswerC = $("<p>", {class: "answers"});
 var questionAnswerD = $("<p>", {class: "answers"});
 var timerDiv = $("<div>", {class: "timer"});
-var time = 31;
+var time = 30;
 var intervalId;
 var clockRunning = false;
 var gamePlay = function game (){
-    time = 31;
-    intervalId = setInterval(count,1000);
-    $("#game").html(timerDiv);
-    $("#game").append(qArray[questionNumber].question);
-    $("#game").append(questionAnswerA.html(qArray[questionNumber].answers.a));
-    $("#game").append(questionAnswerB.html(qArray[questionNumber].answers.b));
-    $("#game").append(questionAnswerC.html(qArray[questionNumber].answers.c));
-    $("#game").append(questionAnswerD.html(qArray[questionNumber].answers.d));
+    if (questionNumber < 8){
+        time = 30;
+        intervalId = setInterval(count,1000);
+        $("#game").html(timerDiv);
+        $("#game").append(qArray[questionNumber].question);
+        $("#game").append(questionAnswerA.html(qArray[questionNumber].answers.a));
+        $("#game").append(questionAnswerB.html(qArray[questionNumber].answers.b));
+        $("#game").append(questionAnswerC.html(qArray[questionNumber].answers.c));
+        $("#game").append(questionAnswerD.html(qArray[questionNumber].answers.d));
+    }
+    else {
+        $("#game").html('<div> "Lets see how well you know the Windy City" </div>');
+        $("#game").append('<div> "Right Answers: "' + rightAnswers + '</div>');
+        $("#game").append('<div> "Wrong Answers: "' + wrongAnswers + '</div>');
+        $("#game").append('<div> "Uanswered: "' + unanswered + '</div>');
+        $("#game").append('<button class="restartButton">RESTART</button>')
+    }
 };
 var count = function countdown (){
     if(time > 0){
-        time--;
         $(".timer").text("Time Remaining: " + time);
+        time--;
         console.log(time)
     }
     else {
@@ -41,6 +50,20 @@ questionAnswerC.attr("data-answer", "c");
 questionAnswerD.attr("data-answer", "d");
 
 $(".startButton").on("click", gamePlay);
+$(document).on("click", ".restartButton", function(){
+    var rightAnswers = 0;
+    var wrongAnswers = 0;
+    var unanswered = 0;
+    var questionNumber = 0;
+    time = 30;
+    intervalId = setInterval(count,1000);
+    $("#game").html(timerDiv);
+    $("#game").append(qArray[questionNumber].question);
+    $("#game").append(questionAnswerA.html(qArray[questionNumber].answers.a));
+    $("#game").append(questionAnswerB.html(qArray[questionNumber].answers.b));
+    $("#game").append(questionAnswerC.html(qArray[questionNumber].answers.c));
+    $("#game").append(questionAnswerD.html(qArray[questionNumber].answers.d)); 
+});
 
 $(document).on("click", ".answers", function(){
     var selectedAnswer = $(this).attr("data-answer");
@@ -48,17 +71,19 @@ $(document).on("click", ".answers", function(){
     console.log(selectedAnswer);
     if(selectedAnswer === correctAnswer){
         rightAnswers ++;
-        
         clearInterval(intervalId);
         $("#game").html('<img id="image" src="'+qArray[questionNumber].img+'">');
+        $("#game").prepend('<div> Correct! </div>');
         questionNumber ++;
         setTimeout(gamePlay, 1000 * 3);
         console.log("correct!")
     }
     else {
         wrongAnswers ++;
-        questionNumber ++;
         clearInterval(intervalId);
+        $("#game").html('<img id="image" src="'+qArray[questionNumber].img+'">');
+        $("#game").prepend('<div> Wrong the answer was ' + qArray[questionNumber].correctAnswerText + '</div>');
+        questionNumber ++;
         setTimeout(gamePlay, 1000 * 3);
         console.log("wrong!")
     }
@@ -74,6 +99,7 @@ var qArray = [
         d: "Ten"
     },
     correctAnswer: "a",
+    correctAnswerText: "Six",
     img: "assets/images/michaeljordan.jpg",
     },
     {
@@ -85,6 +111,7 @@ var qArray = [
         d: "Corey Crawford"
     },
     correctAnswer: "a",
+    correctAnswerText: "Jonathan Toews",
     img: "assets/images/jonathantoews.jpg",
     },
     {
@@ -96,6 +123,7 @@ var qArray = [
         d: "1975"
     },
     correctAnswer: "c",
+    correctAnswerText: "1985",
     img: "assets/images/bearssuperbowl.jpg",
     },
     {
@@ -107,6 +135,7 @@ var qArray = [
         d: "Ben Gordon"
     },
     correctAnswer: "d",
+    correctAnswerText: "Ben Gordon",
     img: "assets/images/bengordon.jpg",
     },
     {
@@ -118,6 +147,7 @@ var qArray = [
         d: "Dick Butkis"
     },
     correctAnswer: "b",
+    correctAnswerText: "Mike Singletary",
     img: "assets/images/mikesingletary.jpg",
     },
     {
@@ -129,6 +159,7 @@ var qArray = [
         d: "Cubs Field"
     },
     correctAnswer: "a",
+    correctAnswerText: "Weeghmam Park",
     img: "assets/images/wrigleyfield.jpg",
     },
     {
@@ -140,6 +171,7 @@ var qArray = [
         d: "August 9th, 1989"
     },
     correctAnswer: "c",
+    correctAnswerText: "August 9th, 1988",
     img: "assets/images/wrigleyrain.jpg",
     },
     {
@@ -151,6 +183,7 @@ var qArray = [
         d: "Roger Clemens"
     },
     correctAnswer: "d",
+    correctAnswerText: "Roger Clemens",
     img: "assets/images/rogerclemens.jpg",
     },
 ]

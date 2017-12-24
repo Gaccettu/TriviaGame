@@ -1,0 +1,30 @@
+body {
+    background-image: url(../images/background.jpg);
+    background-size: cover;
+}
+
+.jumbotron {
+    text-align: center;
+    color:black;
+    font-size: 25px;
+    font-weight: bold;
+    font-family: 'Playfair Display', serif;
+}
+#game {
+    text-align: center;
+    color:black;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    background: white;
+    
+}
+.timer {
+    color: red;
+    border-color: black;
+}
+.answers:hover{
+    border-color: blue;
+    background: orange;
+
+}
