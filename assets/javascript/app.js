@@ -34,12 +34,13 @@ var count = function countdown (){
     if(time > 0){
         $(".timer").text("Time Remaining: " + time);
         time--;
-        console.log(time)
     }
     else {
         unanswered++;
-        questionNumber++;
         clearInterval(intervalId);
+        $("#game").html('<img class="image" src="'+qArray[questionNumber].img+'">');
+        $("#game").prepend('<div> Out of Time! </div>');
+        questionNumber++;
         setTimeout(gamePlay, 1000 * 3);
         console.log("Time's Up!")
     }
