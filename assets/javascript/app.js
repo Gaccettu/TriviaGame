@@ -23,10 +23,10 @@ var gamePlay = function game (){
         $("#game").append(questionAnswerD.html(qArray[questionNumber].answers.d));
     }
     else {
-        $("#game").html('<div> "Lets see how well you know the Windy City" </div>');
-        $("#game").append('<div> "Right Answers: "' + rightAnswers + '</div>');
-        $("#game").append('<div> "Wrong Answers: "' + wrongAnswers + '</div>');
-        $("#game").append('<div> "Uanswered: "' + unanswered + '</div>');
+        $("#game").html('<div> Lets see how well you know the Windy City </div>');
+        $("#game").append('<div> Right Answers: ' + rightAnswers + '</div>');
+        $("#game").append('<div> Wrong Answers: ' + wrongAnswers + '</div>');
+        $("#game").append('<div> Uanswered: ' + unanswered + '</div>');
         $("#game").append('<button class="restartButton">RESTART</button>')
     }
 };
@@ -72,7 +72,7 @@ $(document).on("click", ".answers", function(){
     if(selectedAnswer === correctAnswer){
         rightAnswers ++;
         clearInterval(intervalId);
-        $("#game").html('<img id="image" src="'+qArray[questionNumber].img+'">');
+        $("#game").html('<img class="image" src="'+qArray[questionNumber].img+'">');
         $("#game").prepend('<div> Correct! </div>');
         questionNumber ++;
         setTimeout(gamePlay, 1000 * 3);
@@ -81,7 +81,7 @@ $(document).on("click", ".answers", function(){
     else {
         wrongAnswers ++;
         clearInterval(intervalId);
-        $("#game").html('<img id="image" src="'+qArray[questionNumber].img+'">');
+        $("#game").html('<img class="image" src="'+qArray[questionNumber].img+'">');
         $("#game").prepend('<div> Wrong the answer was ' + qArray[questionNumber].correctAnswerText + '</div>');
         questionNumber ++;
         setTimeout(gamePlay, 1000 * 3);
